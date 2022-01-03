@@ -1,0 +1,28 @@
+syntax = "v1"
+
+info(
+    title: "Login"
+    desc: "登录"
+    author: "Neekity"
+    email: "tc_huang1995@163.com"
+)
+
+
+type (
+    LoginRequest {
+        Email string `json:"email"`
+        Password string `json:"password"`
+    }
+)
+
+@server(
+    group: login
+)
+
+service graphics-api {
+    @handler LoginHandler
+    post /login (LoginRequest) returns (ApiResponse)
+
+    @handler LogoutHandler
+    post /logout () returns (ApiResponse)
+}

@@ -1,0 +1,52 @@
+syntax = "v1"
+
+info(
+    title: "OAuth2"
+    desc: "OAuth2登录"
+    author: "Neekity"
+    email: "tc_huang1995@163.com"
+)
+
+
+type (
+    OaUserInfo {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        Email string `json:"email"`
+        AccessToken string `json:"accessToken"`
+        AccessExpire int64 `json:"accessExpire"`
+    }
+
+    JwtTokenResponse {
+        AccessToken string `json:"access_token"`
+        AccessExpire int64 `json:"access_expire"`
+        RefreshAfter int64 `json:"refresh_after"` // 建议客户端刷新token的绝对时间
+    }
+
+    BasicUserInfo {
+        Id int `json:"id"`
+        Userid string `json:"userid"`
+        Name string `json:"name"`
+        Email string `json:"email"`
+        Avatar string `json:"avatar"`
+        Position string `json:"position"`
+    }
+
+    UserInfo {
+        Code int `json:"code;"`
+        Data BasicUserInfo `json:"data"`
+        Message string `json:"message"`
+    }
+)
+
+@server(
+    group: oauth
+)
+
+service graphics-api {
+    @handler AttemptLoginHandler
+    get /oauth/login () returns ()
+
+    @handler LoginCallbackHandler
+    get /oauth/callback () returns (JwtTokenResponse)
+}

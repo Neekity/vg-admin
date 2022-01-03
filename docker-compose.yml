@@ -1,0 +1,80 @@
+version: "3"
+
+services:
+  goadmin-beanstalkd-1:
+    build:
+      context: ./
+      dockerfile: ./docker/backend/beanstalkd.Dockerfile
+    container_name: goadmin-beanstalkd-1
+    hostname: goadmin-beanstalkd-1
+    expose:
+      - 7771
+    command: ["/bin/sh", "-c", "beanstalkd -p 7771"]
+    networks:
+      - goadmin-nets
+  goadmin-beanstalkd-2:
+    build:
+      context: ./
+      dockerfile: ./docker/backend/beanstalkd.Dockerfile
+    container_name: goadmin-beanstalkd-2
+    hostname: goadmin-beanstalkd-2
+    expose:
+      - 7772
+    command: [ "/bin/sh", "-c", "beanstalkd -p 7772"]
+    networks:
+      - goadmin-nets
+  goadmin-vue:
+    build:
+      context: docker/frontend
+      args:
+        - NODE_VERSION=16-alpine
+        - NPM_REGISTRY=https://registry.npm.taobao.org/
+        - INSTALL_NPM_VUE_CLI=true
+    container_name: goadmin-vue
+    hostname: goadmin-vue
+    depends_on:
+      - goadmin-api
+
+    volumes:
+      - ./frontend:/data
+    networks:
+      - goadmin-nets
+  goadmin-api:
+    build:
+      context: ./
+      dockerfile: ./docker/backend/go.Dockerfile
+    container_name: goadmin-api
+    hostname: goadmin-api
+    command: [ "/bin/sh", "-c", "cd toml && air -c .goadmin-api.air.toml" ]
+    volumes:
+      - ./backend:/data
+    depends_on:
+      - goadmin-beanstalkd-1
+      - goadmin-beanstalkd-2
+      - goadmin-redis
+    ports:
+      - 33061:3306
+    networks:
+      - goadmin-nets
+  goadmin-redis:
+    container_name: goadmin-redis
+    image: daocloud.io/library/redis:4.0.10-alpine
+    command: redis-server --appendonly yes
+    ports:
+      - 63799:6379
+    networks:
+      - goadmin-nets
+  goadmin-nginx:
+    image: nginx:alpine
+    container_name: goadmin-nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8484:80"
+    volumes:
+      - ./docker/nginx/:/etc/nginx/conf.d/
+      - ./backend/resource/image/:/data/resource/image/
+    networks:
+      - goadmin-nets
+networks:
+  goadmin-nets:

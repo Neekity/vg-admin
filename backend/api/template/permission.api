@@ -1,0 +1,42 @@
+syntax = "v1"
+
+info(
+    title: "Permission"
+    desc: "权限"
+    author: "Neekity"
+    email: "tc_huang1995@163.com"
+)
+
+type (
+    SearchPermissionRequest {
+        Name string `json:"name"`
+    }
+
+    StorePermissionRequest {
+        Id      uint   `json:"id"`
+        Name    string `json:"name"`
+        CasbinPermission string `json:"casbin_permission"`
+        Route string `json:"route"`
+        CasbinPermissionType string `json:"casbin_permission_type"`
+    }
+
+    PermissionDetailRequest {
+        Id uint `json:"id"`
+    }
+)
+
+@server(
+    middleware: Auth,AccessLog
+    group: permission
+)
+service graphics-api {
+
+    @handler GetPermissionList
+    post /permission (SearchPermissionRequest) returns (ApiResponse)
+
+    @handler StorePermission
+    post /permission/store (StorePermissionRequest) returns (ApiResponse)
+
+    @handler PermissionDetail
+    post /permission/detail (PermissionDetailRequest) returns (ApiResponse)
+}

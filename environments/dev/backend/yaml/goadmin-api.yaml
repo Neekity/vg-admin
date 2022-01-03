@@ -1,0 +1,23 @@
+Name: goadmin-api
+Host: 0.0.0.0
+Port: 80
+DataSource: root:123456@tcp(127.0.0.1:3306)/goadmin?charset=utf8mb4&parseTime=True&loc=Asia%2FShanghai
+UserInfoUrl:
+ClientID:
+ClientSecret: 
+Endpoint:
+  AuthURL:
+  TokenURL:
+  AuthStyle: 1
+RedirectURL:
+Scopes:
+  - user.basic
+JwtAuth:
+  AccessSecret: g9kS37L38en1IdAn45H10HYeW8QmbJGvwBJOpdZpx8cxrd7EL1phYVJDNbiHnLVv
+  AccessExpire: 604800
+FrontUrl: http://goadmin.com:8484/login?token=
+BeanstalkConf:
+  - Endpoint: beanstalkd-1:7771
+    Tube: tube1
+  - Endpoint: beanstalkd-2:7772
+    Tube: tube2

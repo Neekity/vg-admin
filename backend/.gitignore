@@ -10,12 +10,10 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-
+.idea
 # Dependency directories (remove the comment below to include it)
 # vendor/
-
-/log
-/.idea
-.DS_Store
-!/log/.gitignore
-docker-compose.yml
+/toml
+/yaml
+/tmp
+/resource/image/*

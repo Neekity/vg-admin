@@ -1,0 +1,41 @@
+syntax = "v1"
+
+info(
+    title: "Role"
+    desc: "角色"
+    author: "Neekity"
+    email: "tc_huang1995@163.com"
+)
+
+type (
+    SearchRoleRequest {
+        Name string `json:"name"`
+    }
+
+    StoreAndAssignRolerRequest {
+        Id            uint   `json:"id"`
+        Name          string `json:"name"`
+        CasbinRole    string `json:"casbin_role"`
+        PermissionIds []int  `json:"permission_ids"`
+    }
+
+    RoleDetailRequest {
+        Id uint `json:"id"`
+    }
+)
+
+@server(
+    middleware: Auth,AccessLog
+    group: role
+)
+service graphics-api {
+
+    @handler GetRoleList
+    post /role (SearchRoleRequest) returns (ApiResponse)
+
+    @handler StoreRole
+    post /role/store (StoreAndAssignRolerRequest) returns (ApiResponse)
+
+    @handler RoleDetail
+    post /role/detail (RoleDetailRequest) returns (ApiResponse)
+}

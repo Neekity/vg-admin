@@ -1,0 +1,33 @@
+syntax = "v1"
+
+import (
+	"template/menu.api"
+	"template/oauth.api"
+	"template/user.api"
+	"template/role.api"
+	"template/login.api"
+	"template/permission.api"
+)
+
+info(
+	title: "Go-Admin"
+	desc: "Go-Admin"
+	author: "Neekity"
+	email: "tc_huang1995@163.com"
+)
+
+type (
+	ApiResponse {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+
+	ApiListData {
+		CurPage    int         `json:"curPage"`
+		LastPage   int         `json:"lastPage"`
+		List       interface{} `json:"list"`
+		PageSize   int         `json:"pageSize"`
+		TotalCount int         `json:"totalCount"`
+	}
+)

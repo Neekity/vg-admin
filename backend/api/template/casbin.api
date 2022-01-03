@@ -1,0 +1,52 @@
+syntax = "v1"
+
+info(
+    title: "Casbin"
+    desc: "casbin相关权限控制"
+    author: "Neekity"
+    email: "tc_huang1995@163.com"
+)
+
+type (
+    AddRoleRequest {
+        Name string `json:"name"`
+        Type string `json:"type"`
+    }
+
+    AddPolicyRequest {
+        Object string `json:"object"`
+        Subject string `json:"subject"`
+        DataType string `json:"data_type"`
+    }
+
+    DeleteRole {
+        Name string `json:"name"`
+        Type string `json:"name"`
+    }
+
+    DeletePolicy {
+        Name string `json:"name"`
+        Type string `json:"name"`
+    }
+
+    SearchPermissionRequest {
+        Name string `json:"name"`
+        Page int `json:"page"`
+    }
+)
+
+
+@server(
+    middleware: Auth,AccessLog
+    group: permission
+)
+service system-api {
+    @handler AddPermission
+    post /permission/add (AddPermissionRequest) returns ()
+
+    @handler DeletePermission
+    post /permission/delete (DeletePermissionRequest) returns ()
+
+    @handler PermissionList
+    post /permission/list (SearchPermissionRequest) returns ()
+}

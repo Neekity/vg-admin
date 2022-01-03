@@ -1,0 +1,40 @@
+syntax = "v1"
+
+info(
+    title: "User"
+    desc: "用户"
+    author: "Neekity"
+    email: "tc_huang1995@163.com"
+)
+
+type (
+    SearchUserRequest {
+        Name string `json:"name"`
+    }
+
+    AssignRolerRequest {
+        Id uint `json:"id"`
+        CasbinRoles []string `json:"casbin_roles"`
+    }
+    UserRolesRequest {
+        UserId uint `json:"user_id"`
+    }
+)
+
+@server(
+    middleware: Auth,AccessLog
+    group: user
+)
+service graphics-api {
+    @handler GetUserList
+    post /user (SearchUserRequest) returns (ApiResponse)
+
+    @handler AssignRole
+    post /user/role/assign (AssignRolerRequest) returns (ApiResponse)
+
+    @handler UserRoles
+    post /user/roles (UserRolesRequest) returns (ApiResponse)
+
+    @handler GetUserInfo
+    post /user/info () returns (ApiResponse)
+}
