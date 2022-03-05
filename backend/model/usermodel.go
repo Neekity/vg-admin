@@ -2,7 +2,7 @@ package model
 
 import (
 	"github.com/casbin/casbin/v2"
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
 	"neekity.com/go-admin/common/constant"
 	"neekity.com/go-admin/common/helper"

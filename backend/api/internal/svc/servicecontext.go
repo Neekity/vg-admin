@@ -3,7 +3,7 @@ package svc
 import (
 	"github.com/casbin/casbin/v2"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
-	"github.com/tal-tech/go-zero/rest"
+	"github.com/zeromicro/go-zero/rest"
 
 	"neekity.com/go-admin/api/internal/config"
 	"neekity.com/go-admin/api/internal/middleware"

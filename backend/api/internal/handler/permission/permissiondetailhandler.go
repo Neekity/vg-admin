@@ -7,7 +7,7 @@ import (
 	"neekity.com/go-admin/api/internal/svc"
 	"neekity.com/go-admin/api/internal/types"
 
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func PermissionDetailHandler(ctx *svc.ServiceContext) http.HandlerFunc {

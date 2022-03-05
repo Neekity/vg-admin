@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 	"neekity.com/go-admin/api/internal/logic/menu"
 	"neekity.com/go-admin/api/internal/svc"
 )

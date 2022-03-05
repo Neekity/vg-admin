@@ -10,7 +10,7 @@ import (
 	"neekity.com/go-admin/model"
 	"time"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 	"neekity.com/go-admin/api/internal/svc"
 )
 
