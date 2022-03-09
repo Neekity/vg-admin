@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/casbin/casbin/v2"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 	"neekity.com/go-admin/common/constant"
 	"neekity.com/go-admin/common/helper"
 	"net/http"

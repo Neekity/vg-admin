@@ -3,7 +3,7 @@ package helper
 import (
 	"bytes"
 	"fmt"
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 	"io/ioutil"
 	"net"
 	"net/http"
